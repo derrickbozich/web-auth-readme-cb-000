@@ -8,14 +8,15 @@ class SearchesController < ApplicationController
       # don't forget that pesky v param for versioning
       req.params['v'] = '20160201'
     end
+    binding.pry
     @friends = JSON.parse(resp.body)["response"]["friends"]["items"]
   end
 
   def foursquare
-    
+
     client_id = ENV['FOURSQUARE_CLIENT_ID']
     client_secret = ENV['FOURSQUARE_SECRET']
-
+    binding.pry
     @resp = Faraday.get 'https://api.foursquare.com/v2/venues/search' do |req|
       req.params['client_id'] = client_id
       req.params['client_secret'] = client_secret
